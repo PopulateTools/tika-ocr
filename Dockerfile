@@ -11,6 +11,6 @@ RUN apt-get update \
 
 COPY tika-config.xml /opt/tika-config.xml
 
-USER tika
+USER 35002:35002
 
 CMD ["-c", "/opt/tika-config.xml"]
