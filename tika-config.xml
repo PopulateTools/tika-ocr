@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+  <parsers>
+    <parser class="org.apache.tika.parser.DefaultParser"/>
+    <parser class="org.apache.tika.parser.pdf.PDFParser">
+      <params>
+        <param name="ocrStrategy" type="string">auto</param>
+        <param name="extractInlineImages" type="bool">false</param>
+      </params>
+    </parser>
+    <parser class="org.apache.tika.parser.ocr.TesseractOCRParser">
+      <params>
+        <param name="language" type="string">spa+cat+eus+eng</param>
+        <param name="timeoutSeconds" type="int">300</param>
+      </params>
+    </parser>
+  </parsers>
+</properties>
