@@ -15,10 +15,16 @@ Custom Apache Tika image for `tika.populate.tools` with OCR enabled for Spanish,
 GitHub Actions rebuilds the image:
 
 - on every push to `main`,
+- on every `v*` tag push (versioned releases),
 - nightly at 04:00 UTC, so the upstream `apache/tika:latest-full` security updates get picked up,
 - on demand via `workflow_dispatch`.
 
-Tags published: `latest`, `sha-<short>`, `nightly`.
+Tags published:
+
+- `latest` — rolling, follows `main`.
+- `vX.Y.Z`, `X.Y`, `X` — published when a `vX.Y.Z` git tag is pushed.
+- `sha-<short>` — every build.
+- `nightly` — the scheduled rebuild.
 
 ## Local smoke test
 
@@ -37,25 +43,13 @@ curl -sX PUT --data-binary @/tmp/anexos.pdf \
 
 A successful run prints a body well over 20 bytes containing recognisable Spanish text. The same request against vanilla `apache/tika:latest-full` returns ~20 bytes of newlines for image-only PDFs.
 
-## Deploy via Dokku
+## Deploy
 
-On the `services` host (see `ansible-populate/chores/services/tika_dokku/`):
+Pull the published image and run it however you deploy containers:
 
 ```bash
 docker pull ghcr.io/populatetools/tika-ocr:latest
-dokku git:from-image tika ghcr.io/populatetools/tika-ocr:latest
-```
-
-To update an existing deployment:
-
-```bash
-docker pull ghcr.io/populatetools/tika-ocr:latest && dokku ps:rebuild tika
-```
-
-To roll back to upstream:
-
-```bash
-dokku git:from-image tika apache/tika:latest-full
+docker run -d -p 9998:9998 ghcr.io/populatetools/tika-ocr:latest
 ```
 
 ## Why this exists
