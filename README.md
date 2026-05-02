@@ -37,25 +37,13 @@ curl -sX PUT --data-binary @/tmp/anexos.pdf \
 
 A successful run prints a body well over 20 bytes containing recognisable Spanish text. The same request against vanilla `apache/tika:latest-full` returns ~20 bytes of newlines for image-only PDFs.
 
-## Deploy via Dokku
+## Deploy
 
-On the `services` host (see `ansible-populate/chores/services/tika_dokku/`):
+Pull the published image and run it however you deploy containers:
 
 ```bash
 docker pull ghcr.io/populatetools/tika-ocr:latest
-dokku git:from-image tika ghcr.io/populatetools/tika-ocr:latest
-```
-
-To update an existing deployment:
-
-```bash
-docker pull ghcr.io/populatetools/tika-ocr:latest && dokku ps:rebuild tika
-```
-
-To roll back to upstream:
-
-```bash
-dokku git:from-image tika apache/tika:latest-full
+docker run -d -p 9998:9998 ghcr.io/populatetools/tika-ocr:latest
 ```
 
 ## Why this exists
