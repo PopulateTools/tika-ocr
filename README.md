@@ -15,10 +15,16 @@ Custom Apache Tika image for `tika.populate.tools` with OCR enabled for Spanish,
 GitHub Actions rebuilds the image:
 
 - on every push to `main`,
+- on every `v*` tag push (versioned releases),
 - nightly at 04:00 UTC, so the upstream `apache/tika:latest-full` security updates get picked up,
 - on demand via `workflow_dispatch`.
 
-Tags published: `latest`, `sha-<short>`, `nightly`.
+Tags published:
+
+- `latest` — rolling, follows `main`.
+- `vX.Y.Z`, `X.Y`, `X` — published when a `vX.Y.Z` git tag is pushed.
+- `sha-<short>` — every build.
+- `nightly` — the scheduled rebuild.
 
 ## Local smoke test
 
