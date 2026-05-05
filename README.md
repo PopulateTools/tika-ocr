@@ -8,6 +8,12 @@ Custom Apache Tika image for `tika.populate.tools` with OCR enabled for Spanish,
 - Adds: `tesseract-ocr-spa`, `tesseract-ocr-cat`, `tesseract-ocr-eus`.
 - Loads `tika-config.xml` so the PDF parser uses `ocrStrategy=auto` — OCR runs only when a page has no text layer, so text-PDF extraction stays fast.
 
+## Timeouts
+
+- Per-task ceiling is **20 minutes** (`taskTimeoutMillis=1200000`).
+- Tesseract per-OCR-call ceiling is **20 minutes** (`timeoutSeconds=1200`).
+- Clients can shorten per-request via `X-Tika-Timeout-Millis` and `X-Tika-OCRtimeoutSeconds`. They cannot raise above these defaults.
+
 ## Image
 
 `ghcr.io/populatetools/tika-ocr:latest`
