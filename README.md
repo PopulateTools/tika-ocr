@@ -4,7 +4,7 @@ Custom Apache Tika image for `tika.populate.tools` with OCR enabled for Spanish,
 
 ## What's inside
 
-- Base: `apache/tika:latest-full` (Tika + Tesseract + English).
+- Base: `apache/tika:3.3.0.0-full` (Tika + Tesseract + English). The Tika version is pinned so it matches the plain `apache/tika` image the consumers also call; bump both together.
 - Adds: `tesseract-ocr-spa`, `tesseract-ocr-cat`, `tesseract-ocr-eus`.
 - Loads `tika-config.xml` so the PDF parser uses `ocrStrategy=auto` — OCR runs only when a page has no text layer, so text-PDF extraction stays fast.
 
@@ -22,7 +22,7 @@ GitHub Actions rebuilds the image:
 
 - on every push to `main`,
 - on every `v*` tag push (versioned releases),
-- nightly at 04:00 UTC, so the upstream `apache/tika:latest-full` security updates get picked up,
+- nightly at 04:00 UTC, so `apt-get upgrade` picks up the OS security updates on top of the pinned base,
 - on demand via `workflow_dispatch`.
 
 Tags published:

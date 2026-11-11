@@ -1,10 +1,11 @@
-FROM apache/tika:latest-full
+FROM apache/tika:3.3.0.0-full
 
 USER root
 
 ENV OMP_THREAD_LIMIT=1
 
 RUN apt-get update \
+    && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
         tesseract-ocr-spa \
         tesseract-ocr-cat \
