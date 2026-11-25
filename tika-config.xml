@@ -22,7 +22,7 @@
         <param name="language" type="string">spa+cat+eus</param>
         <param name="pageSegMode" type="string">1</param>
         <param name="preserveInterwordSpacing" type="bool">true</param>
-        <param name="timeoutSeconds" type="int">1800</param>
+        <param name="timeout" type="int">1800</param>
       </params>
     </parser>
   </parsers>
