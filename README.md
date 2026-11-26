@@ -11,7 +11,7 @@ Custom Apache Tika image for `tika.populate.tools` with OCR enabled for Spanish,
 ## Timeouts
 
 - Per-task ceiling is **30 minutes** (`taskTimeoutMillis=1800000`).
-- Tesseract per-OCR-call ceiling is **30 minutes** (`timeoutSeconds=1800`).
+- Tesseract per-OCR-call ceiling is **30 minutes** (`timeout=1800`, in seconds). Tika ignores unknown parameter names silently, so `timeoutSeconds` would leave the 120 s default in place.
 - Clients can shorten per-request via `X-Tika-Timeout-Millis` and `X-Tika-OCRtimeoutSeconds`. They cannot raise above these defaults.
 
 ## Image
